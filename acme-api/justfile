@@ -1,0 +1,27 @@
+# Acme API — project recipes
+
+default:
+    @just --list
+
+dev:
+    npm run dev
+
+lint:
+    npm run lint
+
+typecheck:
+    npx tsc --noEmit
+
+test:
+    npm test
+
+# The ONE command that gates every PR
+verify: lint typecheck test
+    @echo ""
+    @echo "✅ All checks passed — safe to commit"
+
+test-watch:
+    npx vitest
+
+coverage:
+    npx vitest run --coverage

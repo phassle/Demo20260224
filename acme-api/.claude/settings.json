@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "just test",
+      "just lint",
+      "just verify",
+      "just typecheck",
+      "just coverage",
+      "npx eslint --fix *",
+      "npx tsc --noEmit",
+      "npm test",
+      "npm run lint"
+    ],
+    "deny": [
+      "rm -rf",
+      "DROP TABLE",
+      "DELETE FROM",
+      "cat .env",
+      "cat secrets/*"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx eslint --fix $FILE",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "just verify",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
