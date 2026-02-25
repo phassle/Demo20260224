@@ -22,6 +22,14 @@ describe("Order validation", () => {
     expect(result.success).toBe(false);
   });
 
+  it("rejects empty items list", () => {
+    const result = CreateOrderSchema.safeParse({
+      customerEmail: "bob@example.com",
+      items: [],
+    });
+    expect(result.success).toBe(false);
+  });
+
   it("rejects zero quantity", () => {
     const result = CreateOrderSchema.safeParse({
       customerEmail: "bob@example.com",
