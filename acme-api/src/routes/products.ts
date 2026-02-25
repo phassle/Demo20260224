@@ -17,6 +17,16 @@ export async function productRoutes(app: FastifyInstance) {
     return product;
   });
 
+  // DELETE /api/products/:id
+  app.delete<{ Params: { id: string } }>("/:id", async (request, reply) => {
+    const index = products.findIndex((p) => p.id === request.params.id);
+    if (index === -1) {
+      return reply.status(404).send({ error: "Product not found" });
+    }
+    const [deleted] = products.splice(index, 1);
+    return deleted;
+  });
+
   // POST /api/products
   app.post("/", async (request, reply) => {
     const parsed = CreateProductSchema.safeParse(request.body);
