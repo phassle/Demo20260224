@@ -3,16 +3,25 @@ import { products } from "../models/product.js";
 import { orders } from "../models/order.js";
 import { calculateDashboardStats } from "../services/dashboard-stats.js";
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function adminRoutes(app: FastifyInstance) {
   app.get("/", async (_request, reply) => {
     const stats = calculateDashboardStats(products, orders);
 
     const statusRows = Object.entries(stats.ordersByStatus)
-      .map(([status, count]) => `<tr><td>${status}</td><td>${count}</td></tr>`)
+      .map(([status, count]) => `<tr><td>${escapeHtml(status)}</td><td>${count}</td></tr>`)
       .join("");
 
     const categoryRows = Object.entries(stats.productsByCategory)
-      .map(([category, count]) => `<tr><td>${category}</td><td>${count}</td></tr>`)
+      .map(([category, count]) => `<tr><td>${escapeHtml(category)}</td><td>${count}</td></tr>`)
       .join("");
 
     const html = `<!DOCTYPE html>

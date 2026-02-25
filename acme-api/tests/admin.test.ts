@@ -20,10 +20,10 @@ describe("GET /admin", () => {
   it("contains expected stat values from seed data", async () => {
     const response = await app.inject({ method: "GET", url: "/admin" });
     // 3 products, 1 order, revenue = 1 × $79.99 = $79.99
-    expect(response.body).toContain("3");
-    expect(response.body).toContain("1");
-    expect(response.body).toContain("79.99");
-    expect(response.body).toContain("shipped");
-    expect(response.body).toContain("electronics");
+    expect(response.body).toContain(">3<");
+    expect(response.body).toContain(">1<");
+    expect(response.body).toContain("$79.99");
+    expect(response.body).toContain(">shipped<");
+    expect(response.body).toContain(">electronics<");
   });
 });
