@@ -1,11 +1,13 @@
 import Fastify from "fastify";
 import { productRoutes } from "./routes/products.js";
 import { orderRoutes } from "./routes/orders.js";
+import { adminRoutes } from "./routes/admin.js";
 
 const app = Fastify({ logger: true });
 
 app.register(productRoutes, { prefix: "/api/products" });
 app.register(orderRoutes, { prefix: "/api/orders" });
+app.register(adminRoutes, { prefix: "/admin" });
 
 app.get("/api/health", async () => {
   return { status: "ok", timestamp: new Date().toISOString() };
