@@ -7,8 +7,9 @@ node_modules/
 # Test output
 test-results/
 
-# Claude Code — root .claude/ is a workspace duplicate of acme-api/.claude/
-/.claude/
+# Claude Code local artifacts
+.claude/worktrees/
+.claude/settings.local.json
 
 # Specify
 .specify/

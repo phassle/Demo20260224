@@ -43,5 +43,5 @@ tests/                ← Mirror of src/ structure
 - Always run `just verify` before committing
 
 ## Additional docs
-- See `.claude/rules/architecture.md` for route patterns, validation patterns, error conventions
-- See `.claude/rules/testing.md` for test framework, naming, coverage expectations
+- See `../.claude/rules/architecture.md` for route patterns, validation patterns, error conventions
+- See `../.claude/rules/testing.md` for test framework, naming, coverage expectations
