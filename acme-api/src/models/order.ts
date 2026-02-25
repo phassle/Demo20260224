@@ -8,7 +8,7 @@ export const OrderSchema = z.object({
       productId: z.string().uuid(),
       quantity: z.number().int().positive(),
     })
-  ),
+  ).min(1),
   status: z.enum(["pending", "confirmed", "shipped", "delivered"]),
   createdAt: z.string().datetime(),
 });
